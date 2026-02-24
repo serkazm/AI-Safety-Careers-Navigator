@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Safety Career Advisor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-star hs-1">&#10022;</div>
+    <div class="header-star hs-2">&#10022;</div>
+    <div class="header-star hs-3">&#10022;</div>
+    <div class="header-star hs-4">&#10022;</div>
+    <div class="header-star hs-5">&#10022;</div>
+    <div class="header-star hs-6">&#10022;</div>
+    <div class="header-inner">
+      <span class="logo"><span class="logo-star">&#10022;</span> AI Safety Careers Navigator</span>
+      <span class="tagline">Find your path to meaningful impact</span>
+    </div>
+  </header>
+
+  <nav class="progress-nav">
+    <div class="progress-inner">
+      <div class="step active" data-step="1">
+        <div class="step-circle">1</div>
+        <span>Upload CV</span>
+      </div>
+      <div class="connector"></div>
+      <div class="step" data-step="2">
+        <div class="step-circle">2</div>
+        <span>Assessment</span>
+      </div>
+      <div class="connector"></div>
+      <div class="step" data-step="3">
+        <div class="step-circle">3</div>
+        <span>Recommendations</span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── Step 1: Upload ── -->
+    <section id="section-upload" class="section active">
+      <div class="card">
+        <h1>Discover Your AI Safety Career Path</h1>
+        <p class="lead">
+          Upload your CV to receive personalised program recommendations — whether
+          you're a technical researcher, policy professional, or just starting to
+          explore AI safety.
+        </p>
+
+        <div id="upload-area" class="upload-area">
+          <div class="upload-icon">📄</div>
+          <p>Drag and drop your CV here, or</p>
+          <label class="btn btn-primary" for="cv-input">Browse Files</label>
+          <input id="cv-input" type="file" accept=".pdf">
+          <p class="upload-note">PDF only &middot; Max 10 MB</p>
+        </div>
+
+        <div id="upload-alert" class="alert hidden"></div>
+      </div>
+    </section>
+
+    <!-- ── Step 2: Questions ── -->
+    <section id="section-questions" class="section">
+      <div class="card">
+
+        <div id="classification-box" class="classification-box hidden">
+          <div id="classification-badge" class="badge"></div>
+          <p id="classification-reasoning" class="classification-reasoning"></p>
+          <ul id="classification-factors" class="factors-list"></ul>
+        </div>
+
+        <h2>A few quick questions</h2>
+        <p class="lead">Help us personalise your recommendations.</p>
+
+        <form id="questions-form" novalidate>
+          <div id="questions-container"></div>
+          <div class="form-footer">
+            <button type="submit" class="btn btn-primary btn-full">
+              Get My Recommendations →
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </section>
+
+    <!-- ── Step 3: Recommendations ── -->
+    <section id="section-results" class="section">
+      <div class="card">
+        <h2 id="reco-heading" class="hidden">Your Personalised Next Steps</h2>
+        <p id="reco-lead" class="lead hidden">
+          Based on your background and assessment, here are the programs and
+          resources best suited to you.
+        </p>
+
+        <div id="reco-spinner" class="spinner-wrap">
+          <div class="stars-field">
+            <div class="star star-1">&#10022;</div>
+            <div class="star star-2">&#10022;</div>
+            <div class="star star-3">&#10022;</div>
+            <div class="star star-4">&#10022;</div>
+            <div class="star star-5">&#10022;</div>
+            <div class="star star-6">&#10022;</div>
+            <div class="star star-7">&#10022;</div>
+          </div>
+          <p class="spinner-caption">Crunching your career trajectory through our<br>highly sophisticated recommendation engine...</p>
+        </div>
+
+        <div id="reco-content" class="reco-content hidden"></div>
+
+        <div id="followup-section" class="followup-section hidden">
+          <h3>Have questions about these programs?</h3>
+          <div id="followup-thread" class="followup-thread"></div>
+          <form id="followup-form" class="followup-form">
+            <textarea
+              id="followup-input"
+              class="text-answer followup-input"
+              placeholder="e.g., 'What are the prerequisites for MATS?', 'How do I apply to BlueDot Impact?', 'Which program is best for part-time commitment?'"
+              rows="2"
+            ></textarea>
+            <button type="submit" class="btn btn-teal followup-btn">
+              Ask →
+            </button>
+          </form>
+        </div>
+
+        <div id="reco-footer" class="reco-footer hidden">
+          <button onclick="location.reload()" class="btn btn-outline">
+            ↩ Start Over
+          </button>
+          <a href="https://airtable.com/appBt0WoGG6ZyDjxr/pagvdKyOlPOO0nwOQ/form" target="_blank" rel="noopener noreferrer" class="btn btn-teal">
+            Give Feedback
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
