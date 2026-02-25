@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -71,12 +71,6 @@
     <section id="section-questions" class="section">
       <div class="card">
 
-        <div id="classification-box" class="classification-box hidden">
-          <div id="classification-badge" class="badge"></div>
-          <p id="classification-reasoning" class="classification-reasoning"></p>
-          <ul id="classification-factors" class="factors-list"></ul>
-        </div>
-
         <h2>A few quick questions</h2>
         <p class="lead">Help us personalise your recommendations.</p>
 
@@ -101,20 +95,16 @@
           resources best suited to you.
         </p>
 
-        <div id="reco-spinner" class="spinner-wrap">
-          <div class="stars-field">
-            <div class="star star-1">&#10022;</div>
-            <div class="star star-2">&#10022;</div>
-            <div class="star star-3">&#10022;</div>
-            <div class="star star-4">&#10022;</div>
-            <div class="star star-5">&#10022;</div>
-            <div class="star star-6">&#10022;</div>
-            <div class="star star-7">&#10022;</div>
-          </div>
-          <p class="spinner-caption">Crunching your career trajectory through our<br>highly sophisticated recommendation engine...</p>
-        </div>
-
         <div id="reco-content" class="reco-content hidden"></div>
+
+        <div id="followup-pills" class="followup-pills hidden">
+          <p class="followup-pills-label">Common questions:</p>
+          <div class="pills-row">
+            <button class="pill" data-question="How do I apply?">How do I apply?</button>
+            <button class="pill" data-question="What are the prerequisites?">What are the prerequisites?</button>
+            <button class="pill" data-question="Which fits my schedule?">Which fits my schedule?</button>
+          </div>
+        </div>
 
         <div id="followup-section" class="followup-section hidden">
           <h3>Have questions about these programs?</h3>
@@ -146,6 +136,6 @@
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>
