@@ -198,81 +198,55 @@ function collectAnswers() {
 }
 
 /* ─────────────────────────────────────────
-   Step 3 – Recommendations (live-streaming cards)
+   Step 3 – Recommendations (streaming)
 ───────────────────────────────────────── */
-const CARD_ACCENTS = [
-  { color: 'var(--sky)',   text: 'var(--navy)' },
-  { color: 'var(--coral)', text: 'white' },
-  { color: 'var(--teal)',  text: 'white' },
+const LOADING_CAPTIONS = [
+  "Reviewing your background and answers...",
+  "Matching your profile to relevant programs...",
+  "Putting together your recommendations...",
+  "Almost done...",
 ];
 
-function parseSections(md) {
-  const lines = md.split('\n');
-  const sections = [];
-  let current = null;
-
-  for (const line of lines) {
-    const headingMatch = line.match(/^#{1,3}\s+\*{0,2}(.+?)\*{0,2}\s*$/) ||
-                         line.match(/^\*{2}(\d+\.\s*.+?)\*{2}\s*$/) ||
-                         line.match(/^\*{2}([^*]+)\*{2}\s*$/);
-
-    if (headingMatch) {
-      current = { title: headingMatch[1].replace(/\*{2}/g, '').trim(), body: '' };
-      sections.push(current);
-    } else if (current) {
-      current.body += line + '\n';
-    }
-  }
-  return sections;
-}
-
-function buildCard(title, bodyMd, index, accent) {
-  const card = document.createElement('div');
-  card.className = 'program-card';
-  card.style.setProperty('--accent', accent.color);
-  card.style.setProperty('--accent-text', accent.text);
-  card.style.animationDelay = `${index * 0.08}s`;
-
-  card.innerHTML = `
-    <div class="program-card-badge">${index + 1}</div>
-    <div class="program-card-inner">
-      <h3 class="program-card-title">${escapeHtml(title)}</h3>
-      <div class="program-card-body">${marked.parse(bodyMd.trim() || '')}</div>
-    </div>
-  `;
-  return card;
+function startCaptionRotation(el) {
+  let i = 0;
+  el.textContent = LOADING_CAPTIONS[0];
+  return setInterval(() => {
+    i = (i + 1) % LOADING_CAPTIONS.length;
+    el.style.opacity = '0';
+    setTimeout(() => {
+      el.textContent = LOADING_CAPTIONS[i];
+      el.style.opacity = '1';
+    }, 300);
+  }, 6000);
 }
 
 async function streamRecommendations(answers) {
+  const spinner = $('reco-spinner');
   const content = $('reco-content');
   const footer  = $('reco-footer');
 
-  // Show heading and content area immediately
-  $('reco-heading').classList.remove('hidden');
-  $('reco-lead').classList.remove('hidden');
-  content.classList.remove('hidden');
-  content.innerHTML = '';
+  spinner.style.display = 'flex';
+  content.classList.add('hidden');
   footer.classList.add('hidden');
-  $('followup-pills').classList.add('hidden');
-  $('followup-section').classList.add('hidden');
+
+  const captionEl = spinner.querySelector('.spinner-caption');
+  const captionTimer = startCaptionRotation(captionEl);
 
   let accumulated = '';
-  let cardCount = 0;
-
-  // Live streaming element for in-progress text
-  const liveEl = document.createElement('div');
-  liveEl.className = 'reco-live';
-  content.appendChild(liveEl);
 
   try {
     const res = await fetch('/api/get-recommendations', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cv_summary: state.cvSummary, answers }),
+      body: JSON.stringify({
+        cv_summary: state.cvSummary,
+        answers,
+      }),
     });
 
     if (!res.ok) throw new Error('Could not fetch recommendations.');
 
+    // Keep spinner visible while streaming in the background
     const reader  = res.body.getReader();
     const decoder = new TextDecoder();
 
@@ -289,53 +263,72 @@ async function streamRecommendations(answers) {
         try {
           const { text } = JSON.parse(payload);
           accumulated += text;
-        } catch { continue; }
-      }
-
-      // After each chunk, update the display
-      const sections = parseSections(accumulated);
-      const completedCount = Math.max(0, sections.length - 1);
-
-      // Wrap newly completed sections as cards
-      while (cardCount < completedCount) {
-        const s = sections[cardCount];
-        const accent = CARD_ACCENTS[cardCount % CARD_ACCENTS.length];
-        const card = buildCard(s.title, s.body, cardCount, accent);
-        content.insertBefore(card, liveEl);
-        cardCount++;
-      }
-
-      // Show in-progress section as live text
-      if (sections.length > 0) {
-        const current = sections[sections.length - 1];
-        liveEl.innerHTML = marked.parse(`**${current.title}**\n${current.body}`);
-      } else {
-        liveEl.innerHTML = marked.parse(accumulated);
+        } catch {
+          // skip malformed lines
+        }
       }
     }
 
-    // Streaming done — finalize remaining sections as cards
-    const sections = parseSections(accumulated);
-    while (cardCount < sections.length) {
-      const s = sections[cardCount];
-      const accent = CARD_ACCENTS[cardCount % CARD_ACCENTS.length];
-      const card = buildCard(s.title, s.body, cardCount, accent);
-      content.insertBefore(card, liveEl);
-      cardCount++;
-    }
+    // Strip any preamble before the first bold heading
+    const firstBold = accumulated.indexOf('**');
+    if (firstBold > 0) accumulated = accumulated.slice(firstBold);
 
-    liveEl.remove();
-
+    // Done — reveal results
     state.recommendations = accumulated;
-    $('followup-pills').classList.remove('hidden');
+    clearInterval(captionTimer);
+    spinner.style.display = 'none';
+    $('reco-heading').classList.remove('hidden');
+    $('reco-lead').classList.remove('hidden');
+    content.classList.remove('hidden');
+    content.innerHTML = buildAccordion(accumulated);
+    content.classList.add('rendered');
     $('followup-section').classList.remove('hidden');
     footer.classList.remove('hidden');
 
   } catch (err) {
-    liveEl.remove();
-    content.innerHTML = `<p style="color:#c53030">${err.message} Please try again.</p>`;
+    clearInterval(captionTimer);
+    spinner.style.display = 'none';
+    $('reco-heading').classList.remove('hidden');
+    content.classList.remove('hidden');
+    content.innerHTML = `<p style="color:#c53030">⚠️ ${err.message} Please try again.</p>`;
     footer.classList.remove('hidden');
   }
+}
+
+/* ── Accordion builder ── */
+function buildAccordion(md) {
+  // Split markdown into sections by headings (###, **, or numbered bold items)
+  const lines = md.split('\n');
+  const sections = [];
+  let current = null;
+
+  for (const line of lines) {
+    // Match headings like: ### **Name**, **1. Name**, ### Name, **Name**
+    const headingMatch = line.match(/^#{1,3}\s+\*{0,2}(.+?)\*{0,2}\s*$/) ||
+                         line.match(/^\*{2}(\d+\.\s*.+?)\*{2}\s*$/) ||
+                         line.match(/^\*{2}([^*]+)\*{2}\s*$/);
+
+    if (headingMatch) {
+      current = { title: headingMatch[1].replace(/\*{2}/g, '').trim(), body: '' };
+      sections.push(current);
+    } else if (current) {
+      current.body += line + '\n';
+    }
+  }
+
+  if (sections.length === 0) {
+    return marked.parse(md);
+  }
+
+  return sections.map((s, i) => `
+    <div class="accordion-item">
+      <button class="accordion-toggle" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
+        <span class="accordion-title">${escapeHtml(s.title)}</span>
+        <span class="accordion-chevron">&#9662;</span>
+      </button>
+      <div class="accordion-body">${marked.parse(s.body.trim())}</div>
+    </div>
+  `).join('');
 }
 
 /* ─────────────────────────────────────────
@@ -421,22 +414,10 @@ function setupFollowUp() {
   });
 }
 
-/* ── Follow-up Pills ── */
-function setupFollowUpPills() {
-  $('followup-pills').addEventListener('click', e => {
-    const pill = e.target.closest('.pill');
-    if (!pill) return;
-    $('followup-input').value = pill.dataset.question;
-    $('followup-form').requestSubmit();
-    $('followup-pills').classList.add('hidden');
-  });
-}
-
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded', () => {
   setupUpload();
   setupQuestionsForm();
   setupFollowUp();
-  setupFollowUpPills();
   setSection('upload');
 });

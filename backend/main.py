@@ -45,9 +45,17 @@ QUESTIONS = [
     },
     {
         "id": 2,
-        "question": "Describe any AI safety materials you've engaged with — papers, books, courses, podcasts. Write 'None yet' if you're just starting.",
-        "type": "text",
-        "placeholder": "e.g., 'Concrete Problems in AI Safety', Superintelligence, 80,000 Hours articles, AGI Safety Fundamentals course...",
+        "question": "Which types of AI safety materials have you engaged with? Select all that apply.",
+        "type": "multi",
+        "options": [
+            "Academic papers (e.g., Concrete Problems in AI Safety)",
+            "Books (e.g., Superintelligence, Human Compatible)",
+            "Online courses (e.g., AGI Safety Fundamentals)",
+            "Podcasts or video content",
+            "80,000 Hours articles / career guides",
+            "Blog posts (Alignment Forum, LessWrong)",
+            "None yet",
+        ],
     },
     {
         "id": 3,
@@ -118,14 +126,12 @@ class QuestionAnswer(BaseModel):
 
 
 class RecommendationRequest(BaseModel):
-    cv_category: str
     cv_summary: str
     answers: list[QuestionAnswer]
 
 
 class FollowUpRequest(BaseModel):
     question: str
-    cv_category: str
     recommendations: str
     chat_history: list[dict] = []
 
@@ -158,67 +164,7 @@ async def classify_cv(file: UploadFile = File(...)):
             detail="No text found in this PDF. It may be image-based (scanned). Please use a text-based PDF.",
         )
 
-    # Truncate to ~3 500 tokens of input
-    cv_text_truncated = cv_text[:14000]
-
-    try:
-        response = client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=1024,
-            messages=[
-                {
-                    "role": "user",
-                    "content": (
-                        "Analyse this CV and classify the person into exactly one of these categories:\n"
-                        "- computer science student\n"
-                        "- experienced ML professional\n"
-                        "- professional with legal background\n"
-                        "- policy/governance professional\n"
-                        "- general professional\n\n"
-                        f"CV:\n---\n{cv_text_truncated}\n---\n\n"
-                        "Return a JSON object with exactly:\n"
-                        "- category: one of the 5 strings above (exact match)\n"
-                        "- reasoning: 2-3 sentences explaining the classification\n"
-                        "- key_factors: array of 3-5 specific items from the CV supporting this"
-                    ),
-                }
-            ],
-            output_config={
-                "format": {
-                    "type": "json_schema",
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "category": {
-                                "type": "string",
-                                "enum": [
-                                    "computer science student",
-                                    "experienced ML professional",
-                                    "professional with legal background",
-                                    "policy/governance professional",
-                                    "general professional",
-                                ],
-                            },
-                            "reasoning": {"type": "string"},
-                            "key_factors": {
-                                "type": "array",
-                                "items": {"type": "string"},
-                            },
-                        },
-                        "required": ["category", "reasoning", "key_factors"],
-                        "additionalProperties": False,
-                    },
-                }
-            },
-        )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Claude API error: {e}")
-
-    result = json.loads(response.content[0].text)
     return {
-        "category": result["category"],
-        "reasoning": result["reasoning"],
-        "key_factors": result["key_factors"],
         "cv_summary": cv_text[:1000],
     }
 
@@ -242,14 +188,28 @@ async def get_recommendations(request: RecommendationRequest):
                 "You MUST start your response with the first program recommendation immediately. "
                 "FORBIDDEN: any title, heading, greeting, introduction, summary, or preamble before the first program. "
                 "FORBIDDEN: using the user's name anywhere. Always say 'you'/'your', never third person. "
-                "Your first characters must be a bold program name like **Program Name**."
+                "Your first characters must be a bold program name like **Program Name**.\n\n"
+                "## Key guidelines\n"
+                "- Prioritize the user's GOALS over their background. Find ways to combine their background with their stated goal creatively. "
+                "For example, if someone has a policy background but wants to do fieldbuilding, suggest they could organize AI policy fellowships.\n"
+                "- Fieldbuilding and governance/policy are DISTINCT types of work. Fieldbuilding includes organizing courses, fellowships, events, "
+                "improving talent flow, career advisory, recruitment, and community management. Governance/policy is about improving legal regulations "
+                "of AI and the political landscape. Never confuse or conflate these two.\n"
+                "- Not everyone wants to do research. Do NOT suggest research fellowships to people who want to do other work "
+                "(e.g., communications, fieldbuilding, operations). Instead, suggest looking for entry-level or junior roles of the relevant type in AI safety.\n"
+                "- BlueDot Impact courses are mostly for people new to AI safety or considering transitioning into the field. "
+                "A common next step after BlueDot is a deeper-engagement opportunity like MATS or the Astra fellowship.\n"
+                "- AI safety opportunities are quite competitive (often one in a few dozen candidates is accepted, even BlueDot is selective). "
+                "Building a track record matters — e.g., organizing an AI safety university group, attending conferences, doing small projects. "
+                "Students and alumni of top universities and people with major STEM achievements are strongly preferred.\n"
+                "- The 80,000 Hours website (80000hours.org) is the best source of knowledge about qualifications needed for different AI safety roles. "
+                "Their job board lists AI safety positions. Recommend it as a resource when relevant."
             ),
             messages=[
                 {
                     "role": "user",
                     "content": (
                         "## Background\n"
-                        f"**Professional category:** {request.cv_category}\n"
                         f"**CV excerpt:** {request.cv_summary[:600]}\n\n"
                         "## Self-Assessment\n"
                         f"{answers_text}\n\n"
@@ -258,7 +218,7 @@ async def get_recommendations(request: RecommendationRequest):
                         "## Task\n"
                         "Recommend 3–5 programs. For each:\n"
                         "1. Bold the program name as a heading\n"
-                        "2. Explain specifically WHY it fits me (reference my category, experience, time, and goals)\n"
+                        "2. Explain specifically WHY it fits me (reference my background, experience, time, and goals)\n"
                         "3. Note what I'll gain and any prerequisites or application tips\n\n"
                         "Order by most immediately accessible first. Be specific, honest, and encouraging. "
                         "If I have limited time, acknowledge it and suggest the most efficient options.\n\n"
@@ -284,7 +244,6 @@ async def follow_up(request: FollowUpRequest):
         {
             "role": "user",
             "content": (
-                f"I was classified as: {request.cv_category}\n\n"
                 f"I received these program recommendations:\n{request.recommendations[:2000]}\n\n"
                 "I have a follow-up question about these opportunities."
             ),
