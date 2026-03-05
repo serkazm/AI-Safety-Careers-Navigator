@@ -130,7 +130,7 @@ header::after {
   min-width: 85px;
 }
 .step.active { opacity: 1; }
-.step.done   { opacity: .7; }
+.step.done   { opacity: .7; cursor: pointer; }
 .step-circle {
   width: 36px; height: 36px;
   border-radius: 50%;
@@ -225,6 +225,18 @@ h2 {
 .upload-area p { color: var(--slate); margin-bottom: 1.125rem; }
 .upload-icon { font-size: 2.75rem; margin-bottom: 1.125rem; }
 .upload-note { font-size: .75rem; color: var(--muted); margin-top: .875rem; margin-bottom: 0; }
+.privacy-note {
+  margin-top: 1.5rem;
+  font-size: .75rem;
+  color: var(--muted);
+  line-height: 1.65;
+  text-align: center;
+}
+.privacy-note a {
+  color: var(--slate);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 input[type="file"] { display: none; }
 
 /* ── Alerts ── */
@@ -403,8 +415,24 @@ input[type="file"] { display: none; }
   border-color: var(--sky);
   color: var(--navy);
 }
+.btn-back {
+  background: transparent;
+  color: var(--muted);
+  padding: .75rem 1rem;
+  font-size: .875rem;
+}
+.btn-back:hover {
+  color: var(--navy);
+  background: var(--sky-wash);
+}
 .btn-full { width: 100%; padding: 1rem 2rem; font-size: 1rem; }
 .form-footer { margin-top: 2.5rem; }
+.form-footer-row {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.form-footer-row .btn-full { flex: 1; }
 
 /* ── Stars loading animation ── */
 .spinner-wrap {

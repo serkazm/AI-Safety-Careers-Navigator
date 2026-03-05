@@ -24,6 +24,21 @@ function setSection(name) {
   });
 }
 
+function goBack(targetSection) {
+  setSection(targetSection);
+}
+
+function setupProgressNav() {
+  const stepMap = { 1: 'upload', 2: 'questions', 3: 'results' };
+  document.querySelectorAll('[data-step]').forEach(el => {
+    el.addEventListener('click', () => {
+      if (el.classList.contains('done')) {
+        goBack(stepMap[parseInt(el.dataset.step, 10)]);
+      }
+    });
+  });
+}
+
 function showAlert(type, html) {
   const el = $('upload-alert');
   el.className = `alert ${type}`;
@@ -419,5 +434,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupUpload();
   setupQuestionsForm();
   setupFollowUp();
+  setupProgressNav();
   setSection('upload');
 });

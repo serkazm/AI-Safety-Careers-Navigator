@@ -64,6 +64,14 @@
         </div>
 
         <div id="upload-alert" class="alert hidden"></div>
+
+        <p class="privacy-note">
+          Your CV is processed in memory and is not stored on our servers.
+          The extracted text is sent to
+          <a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer">Anthropic's</a>
+          Claude API to generate your recommendations. No personal data is
+          retained after your session ends.
+        </p>
       </div>
     </section>
 
@@ -77,9 +85,14 @@
         <form id="questions-form" novalidate>
           <div id="questions-container"></div>
           <div class="form-footer">
-            <button type="submit" class="btn btn-primary btn-full">
-              Get My Recommendations →
-            </button>
+            <div class="form-footer-row">
+              <button type="button" class="btn btn-back" onclick="goBack('upload')">
+                ← Back
+              </button>
+              <button type="submit" class="btn btn-primary btn-full">
+                Get My Recommendations →
+              </button>
+            </div>
           </div>
         </form>
 
@@ -127,6 +140,9 @@
         </div>
 
         <div id="reco-footer" class="reco-footer hidden">
+          <button type="button" class="btn btn-back" onclick="goBack('questions')">
+            ← Change Answers
+          </button>
           <button onclick="location.reload()" class="btn btn-outline">
             ↩ Start Over
           </button>
