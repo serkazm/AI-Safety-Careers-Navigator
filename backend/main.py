@@ -90,16 +90,25 @@ QUESTIONS = [
 ]
 
 AI_SAFETY_PROGRAMS = """**BlueDot Impact – AI Safety Fundamentals (Technical Track)**
-An 8-week facilitated online course covering alignment fundamentals: reward misspecification, RLHF, interpretability, robustness. Best for those with some programming background. Free, runs multiple cohorts per year. aisafetyfundamentals.com
+An 8-week facilitated online course covering alignment fundamentals: reward misspecification, RLHF, interpretability, robustness. Best for those with some programming background. Free, runs multiple cohorts per year. Mostly for people new to AI safety or considering transitioning into the field. A common next step after BlueDot is a deeper-engagement opportunity like ARENA, MATS, or Astra fellowship. Selective — does not accept everyone. aisafetyfundamentals.com
 
 **BlueDot Impact – AI Governance Fundamentals**
-An 8-week course covering AI governance, policy, and safety from a non-technical perspective. Ideal for policy, legal, and social-science backgrounds. Free.
+An 8-week course covering AI governance, policy, and safety from a non-technical perspective. Ideal for policy, legal, and social-science backgrounds. Free. Mostly for people new to AI safety or considering transitioning. Selective.
 
 **AISF Self-Paced Reading Groups**
 Community-run reading groups following the AI Safety Fundamentals curriculum. Flexible timing, both technical and governance tracks available. Low commitment, good for exploring before joining intensive programs.
 
+**ARENA (Alignment Research Engineer Accelerator)**
+Intensive technical upskilling program focused on ML engineering for alignment research. Many participants join after completing a BlueDot course or other introductory steps. After ARENA, people typically move on to high-engagement programs like MATS or Astra before landing their first AI safety job. Requires programming and ML foundations.
+
 **MATS (ML Alignment Theory Scholars)**
-Competitive 3-month research program pairing scholars with senior alignment researchers (Anthropic, DeepMind, ARC). Requires strong ML/research background. Stipend provided. matsprogram.org
+Competitive 3-month research program pairing scholars with senior alignment researchers (Anthropic, DeepMind, ARC). Requires strong ML/research background. Stipend provided. Very competitive. matsprogram.org
+
+**Astra Fellowship**
+A deeper-engagement fellowship opportunity for people who have already taken initial steps in AI safety (e.g., completed BlueDot or ARENA). Competitive.
+
+**Future Impact Group (FIG)**
+Very high bar, very personalized fellowship. FIG identifies what talents and skillsets specific projects need, then headhunts matching candidates. Part-time & remote format designed for working professionals. Currently working on 3 projects with Yoshua Bengio: (1) insurance and liability as levers for AI safety, (2) AI-driven concentration of power and economic sovereignty, (3) military AI and threats to AI safety.
 
 **AI Safety Camp**
 Project-based research retreats (~2 weeks) where small teams tackle concrete alignment problems. Some technical background required. Good stepping stone before MATS.
@@ -108,16 +117,19 @@ Project-based research retreats (~2 weeks) where small teams tackle concrete ali
 AI safety hackathons (online, 1–3 days) and longer fellowships. Open to varied backgrounds including governance, interpretability, and conceptual work. Low barrier to entry, good for building an initial research portfolio.
 
 **80,000 Hours AI Safety Career Advising**
-Free 1-on-1 coaching to identify the highest-impact AI safety path for your specific background. Strongly recommended as an early step for anyone uncertain about direction. 80000hours.org/speak-with-us
+Free 1-on-1 coaching to identify the highest-impact AI safety path for your specific background. Strongly recommended as an early step for anyone uncertain about direction. Their website (80000hours.org) is the best source of knowledge about qualifications needed for different AI safety roles, with excellent profile descriptions. Their job board lists AI safety-related positions. 80000hours.org/speak-with-us
 
 **GovAI Fellowship (Centre for the Governance of AI)**
-Fellowships for policy, legal, and social-science professionals focused on AI governance research. Oxford-based and remote. Highly competitive.
+Fellowships for policy, legal, and social-science professionals focused on AI governance research. Oxford-based and remote. Very competitive — receives several thousand applications per edition. High bar for applicants.
+
+**Successif**
+Provides support for professionals transitioning into AI safety careers. Great at helping with the transition process, including upskilling, network-building, and navigating the AI safety job market.
 
 **CAIS (Center for AI Safety)**
 Technical workshops, research support, and the ML Safety course. Resources at safe.ai. Technical focus.
 
 **Alignment Forum and LessWrong**
-Online communities central to AI safety research discourse. Writing and engaging here builds network and credibility. Essential reading for those pursuing technical alignment."""
+Online communities central to AI safety research discourse. Writing and engaging here builds network and credibility. Essential reading for those pursuing technical alignment. Having LessWrong background and context can significantly accelerate a career transition into AI safety."""
 
 
 class QuestionAnswer(BaseModel):
@@ -191,19 +203,28 @@ async def get_recommendations(request: RecommendationRequest):
                 "Your first characters must be a bold program name like **Program Name**.\n\n"
                 "## Key guidelines\n"
                 "- Prioritize the user's GOALS over their background. Find ways to combine their background with their stated goal creatively. "
-                "For example, if someone has a policy background but wants to do fieldbuilding, suggest they could organize AI policy fellowships.\n"
-                "- Fieldbuilding and governance/policy are DISTINCT types of work. Fieldbuilding includes organizing courses, fellowships, events, "
-                "improving talent flow, career advisory, recruitment, and community management. Governance/policy is about improving legal regulations "
-                "of AI and the political landscape. Never confuse or conflate these two.\n"
+                "For example, if someone has a policy background but wants to do fieldbuilding, suggest they could organize AI policy fellowships — "
+                "that uses their skillset and applies it to their goal.\n"
+                "- Fieldbuilding and governance/policy are DISTINCT types of work. DO NOT mistake these two. "
+                "Fieldbuilding includes organizing courses, fellowships, events, improving talent flow, career advisory, recruitment, and community management. "
+                "Governance/policy is about improving legal regulations of AI and the political landscape. Never confuse or conflate these two.\n"
                 "- Not everyone wants to do research. Do NOT suggest research fellowships to people who want to do other work "
                 "(e.g., communications, fieldbuilding, operations). Instead, suggest looking for entry-level or junior roles of the relevant type in AI safety.\n"
                 "- BlueDot Impact courses are mostly for people new to AI safety or considering transitioning into the field. "
-                "A common next step after BlueDot is a deeper-engagement opportunity like MATS or the Astra fellowship.\n"
+                "A common next step after BlueDot is a deeper-engagement opportunity like ARENA, MATS, or the Astra fellowship.\n"
                 "- AI safety opportunities are quite competitive (often one in a few dozen candidates is accepted, even BlueDot is selective). "
-                "Building a track record matters — e.g., organizing an AI safety university group, attending conferences, doing small projects. "
-                "Students and alumni of top universities and people with major STEM achievements are strongly preferred.\n"
+                "Building a track record matters — e.g., organizing an AI safety university group, attending conferences, doing small projects.\n"
+                "- Students and alumni of top universities (Harvard, MIT, etc.) and people with major STEM achievements "
+                "(e.g., International Math Olympiad winners, ex-CERN employees) are strongly preferred in competitive programs.\n"
+                "- People with a PhD in CS or significant professional experience (e.g., cybersecurity researchers, research managers in tech) "
+                "may be accepted to fellowships even without prior AI safety involvement. More junior candidates (e.g., undergrads) face a higher bar — "
+                "they typically need a track record in the AI safety community, strong understanding of threat models, references, or exceptional educational achievements.\n"
+                "- Typical transition timeline for experienced professionals from outside AIS: 6–18 months to upskill, join the network, build trust, and complete small projects. "
+                "Sometimes 2–3 months if the person is free full-time and already has LessWrong background/context. Successif is great at supporting the transition process.\n"
+                "- A typical progression path is: BlueDot → ARENA → MATS/Astra → first AI safety job.\n"
                 "- The 80,000 Hours website (80000hours.org) is the best source of knowledge about qualifications needed for different AI safety roles. "
-                "Their job board lists AI safety positions. Recommend it as a resource when relevant."
+                "They have excellent profile descriptions. Their job board lists AI safety positions. Recommend it as a resource when relevant.\n"
+                "- In rare occasions, orgs might hire a good professional from outside the community and train them in AI safety."
             ),
             messages=[
                 {
@@ -267,7 +288,21 @@ async def follow_up(request: FollowUpRequest):
                 "You are an expert AI safety career advisor. "
                 "Answer follow-up questions about AI safety programs concisely and helpfully. "
                 "Reference specific details about programs when relevant. "
-                "Always address the user as 'you'. Keep answers focused and practical."
+                "Always address the user as 'you'. Keep answers focused and practical.\n\n"
+                "## Key domain knowledge\n"
+                "- Fieldbuilding (organizing courses, fellowships, events, talent flow, career advisory, recruitment, community management) "
+                "and governance/policy (legal regulations, political landscape) are DISTINCT types of work. Never confuse them.\n"
+                "- Not everyone wants research — suggest entry-level/junior roles for people interested in comms, fieldbuilding, ops, etc.\n"
+                "- Typical career progression: BlueDot → ARENA → MATS/Astra → first AI safety job.\n"
+                "- Transition timeline for experienced professionals: typically 6–18 months; sometimes 2–3 months if full-time with LessWrong background.\n"
+                "- Top universities and major STEM achievements strongly preferred in competitive programs. "
+                "PhD holders in CS and experienced tech professionals may get in without prior AI safety involvement. "
+                "More junior candidates need stronger AI safety track records.\n"
+                "- 80000hours.org is the best resource for role profiles and job listings. Successif helps with career transitions.\n"
+                "- FIG (Future Impact Group) has a very high bar, personalized approach, part-time/remote for working professionals, "
+                "currently running 3 projects with Yoshua Bengio.\n"
+                "- GovAI receives several thousand applications per edition.\n"
+                "- In rare cases, orgs may hire good professionals from outside the community and train them."
             ),
             messages=messages,
         ) as stream:
