@@ -186,7 +186,7 @@ async def classify_cv(file: UploadFile = File(...)):
         )
 
     return {
-        "cv_summary": cv_text[:1000],
+        "cv_summary": cv_text,
     }
 
 
@@ -250,7 +250,7 @@ async def get_recommendations(request: RecommendationRequest):
                     "role": "user",
                     "content": (
                         "## Background\n"
-                        f"**CV excerpt:** {request.cv_summary[:600]}\n\n"
+                        f"**CV:** {request.cv_summary}\n\n"
                         "## Self-Assessment\n"
                         f"{answers_text}\n\n"
                         "## Available Programs\n"
