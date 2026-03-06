@@ -90,55 +90,55 @@ QUESTIONS = [
 ]
 
 AI_SAFETY_PROGRAMS = """**BlueDot Impact – AI Safety Fundamentals (Technical Track)**
-An 8-week facilitated online course covering alignment fundamentals: reward misspecification, RLHF, interpretability, robustness. Best for those with some programming background. Free, runs multiple cohorts per year. Mostly for people new to AI safety or considering transitioning into the field. A common next step after BlueDot is a deeper-engagement opportunity like ARENA, MATS, or Astra fellowship. Selective — does not accept everyone. aisafetyfundamentals.com
+An 8-week facilitated online course covering alignment fundamentals: reward misspecification, RLHF, interpretability, robustness. Best for those with some programming background. Free, runs multiple cohorts per year. Mostly for people new to AI safety or considering transitioning into the field. A common next step after BlueDot is a deeper-engagement opportunity like ARENA, MATS, or Astra fellowship. Selective — does not accept everyone. Time commitment: ~5–8 hours/week for 8 weeks (part-time friendly). aisafetyfundamentals.com
 
 **BlueDot Impact – AI Governance Fundamentals**
-An 8-week course covering AI governance, policy, and safety from a non-technical perspective. Ideal for policy, legal, and social-science backgrounds. Free. Mostly for people new to AI safety or considering transitioning. Selective.
+An 8-week course covering AI governance, policy, and safety from a non-technical perspective. Ideal for policy, legal, and social-science backgrounds. Free. Mostly for people new to AI safety or considering transitioning. Selective. Time commitment: ~5–8 hours/week for 8 weeks (part-time friendly).
 
 **AISF Self-Paced Reading Groups**
-Community-run reading groups following the AI Safety Fundamentals curriculum. Flexible timing, both technical and governance tracks available. Low commitment, good for exploring before joining intensive programs.
+Community-run reading groups following the AI Safety Fundamentals curriculum. Flexible timing, both technical and governance tracks available. Low commitment, good for exploring before joining intensive programs. Time commitment: ~2–3 hours/week, flexible schedule.
 
 **ARENA (Alignment Research Engineer Accelerator)**
-Intensive technical upskilling program focused on ML engineering for alignment research. Many participants join after completing a BlueDot course or other introductory steps. After ARENA, people typically move on to high-engagement programs like MATS or Astra before landing their first AI safety job. Requires programming and ML foundations.
+Intensive technical upskilling program focused on ML engineering for alignment research. Many participants join after completing a BlueDot course or other introductory steps. After ARENA, people typically move on to high-engagement programs like MATS or Astra before landing their first AI safety job. Requires programming and ML foundations. Time commitment: full-time.
 
 **MATS (ML Alignment Theory Scholars)**
-Competitive 3-month research program pairing scholars with senior alignment researchers (Anthropic, DeepMind, ARC). Requires strong ML/research background. Stipend provided. Very competitive. matsprogram.org
+Competitive 3-month research program pairing scholars with senior alignment researchers (Anthropic, DeepMind, ARC). Requires strong ML/research background. Stipend provided. Very competitive. Time commitment: full-time. matsprogram.org
 
 **Astra Fellowship (Constellation)**
-A fully-funded, in-person fellowship (3–6 months) at Constellation's Berkeley research center that pairs emerging researchers with senior advisors. Project focus areas include technical safety, governance, strategy, and field-building. Best for people who have already taken initial steps in AI safety (e.g., completed BlueDot or ARENA) and want intensive mentorship. Very competitive. constellation.org/programs/astra
+A fully-funded, in-person fellowship (3–6 months) at Constellation's Berkeley research center that pairs emerging researchers with senior advisors. Project focus areas include technical safety, governance, strategy, and field-building. Best for people who have already taken initial steps in AI safety (e.g., completed BlueDot or ARENA) and want intensive mentorship. Very competitive. Time commitment: full-time. constellation.org/programs/astra
 
 **Constellation Visiting Fellowship**
-A lightly-structured, funded fellowship (3–6 months) for full-time AI safety researchers to work from Constellation's Berkeley research center and connect with the broader network. Best for researchers already working in AI safety who want access to a collaborative environment and strong network. constellation.org/programs/visiting-fellowship
+A lightly-structured, funded fellowship (3–6 months) for full-time AI safety researchers to work from Constellation's Berkeley research center and connect with the broader network. Best for researchers already working in AI safety who want access to a collaborative environment and strong network. Time commitment: full-time. constellation.org/programs/visiting-fellowship
 
 **Constellation Incubator**
-A 4-month program designed to build the next wave of organizations addressing advanced AI risks. Provides funding, operational support, and access to Constellation's expert network. Best for people with a concrete org-building idea related to AI safety. constellation.org/programs/incubator
+A 4-month program designed to build the next wave of organizations addressing advanced AI risks. Provides funding, operational support, and access to Constellation's expert network. Best for people with a concrete org-building idea related to AI safety. Time commitment: full-time. constellation.org/programs/incubator
 
 **Constellation General Hosting & Visitors**
-Short-term visiting and ongoing workspace access at Constellation's Berkeley research center for individuals, teams, and established organizations aligned with the AI safety mission. Good for networking and short collaborative stints. constellation.org/contact
+Short-term visiting and ongoing workspace access at Constellation's Berkeley research center for individuals, teams, and established organizations aligned with the AI safety mission. Good for networking and short collaborative stints. Time commitment: flexible (days to weeks). constellation.org/contact
 
 **Future Impact Group (FIG)**
-Very high bar, very personalized fellowship. FIG identifies what talents and skillsets specific projects need, then headhunts matching candidates. Part-time & remote format designed for working professionals. Currently working on 3 projects with Yoshua Bengio: (1) insurance and liability as levers for AI safety, (2) AI-driven concentration of power and economic sovereignty, (3) military AI and threats to AI safety.
+Very high bar, very personalized fellowship. FIG identifies what talents and skillsets specific projects need, then headhunts matching candidates. Part-time & remote format designed for working professionals. Currently working on 3 projects with Yoshua Bengio: (1) insurance and liability as levers for AI safety, (2) AI-driven concentration of power and economic sovereignty, (3) military AI and threats to AI safety. Time commitment: part-time, remote (compatible with a full-time job).
 
 **AI Safety Camp**
-Project-based research retreats (~2 weeks) where small teams tackle concrete alignment problems. Some technical background required. Good stepping stone before MATS.
+Project-based research retreats (~2 weeks) where small teams tackle concrete alignment problems. Some technical background required. Good stepping stone before MATS. Time commitment: full-time for ~2 weeks.
 
 **Apart Research**
-AI safety hackathons (online, 1–3 days) and longer fellowships. Open to varied backgrounds including governance, interpretability, and conceptual work. Low barrier to entry, good for building an initial research portfolio.
+AI safety hackathons (online, 1–3 days) and longer fellowships. Open to varied backgrounds including governance, interpretability, and conceptual work. Low barrier to entry, good for building an initial research portfolio. Time commitment: 1–3 days per hackathon (part-time friendly).
 
 **80,000 Hours AI Safety Career Advising**
-Free 1-on-1 coaching to identify the highest-impact AI safety path for your specific background. Strongly recommended as an early step for anyone uncertain about direction. Their website (80000hours.org) is the best source of knowledge about qualifications needed for different AI safety roles, with excellent profile descriptions. Their job board lists AI safety-related positions. 80000hours.org/speak-with-us
+Free 1-on-1 coaching to identify the highest-impact AI safety path for your specific background. Strongly recommended as an early step for anyone uncertain about direction. Their website (80000hours.org) is the best source of knowledge about qualifications needed for different AI safety roles, with excellent profile descriptions. Their job board lists AI safety-related positions. Time commitment: minimal (one-off calls). 80000hours.org/speak-with-us
 
 **GovAI Fellowship (Centre for the Governance of AI)**
-Fellowships for policy, legal, and social-science professionals focused on AI governance research. Oxford-based and remote. Very competitive — receives several thousand applications per edition. High bar for applicants.
+Fellowships for policy, legal, and social-science professionals focused on AI governance research. Oxford-based and remote. Very competitive — receives several thousand applications per edition. High bar for applicants. Time commitment: full-time.
 
 **Successif**
-Provides support for professionals transitioning into AI safety careers. Great at helping with the transition process, including upskilling, network-building, and navigating the AI safety job market.
+Provides support for professionals transitioning into AI safety careers. Great at helping with the transition process, including upskilling, network-building, and navigating the AI safety job market. Time commitment: flexible.
 
 **CAIS (Center for AI Safety)**
-Technical workshops, research support, and the ML Safety course. Resources at safe.ai. Technical focus.
+Technical workshops, research support, and the ML Safety course. Resources at safe.ai. Technical focus. Time commitment: varies (self-paced course is part-time friendly).
 
 **Alignment Forum and LessWrong**
-Online communities central to AI safety research discourse. Writing and engaging here builds network and credibility. Essential reading for those pursuing technical alignment. Having LessWrong background and context can significantly accelerate a career transition into AI safety."""
+Online communities central to AI safety research discourse. Writing and engaging here builds network and credibility. Essential reading for those pursuing technical alignment. Having LessWrong background and context can significantly accelerate a career transition into AI safety. Time commitment: flexible, self-directed."""
 
 
 class QuestionAnswer(BaseModel):
@@ -236,7 +236,14 @@ async def get_recommendations(request: RecommendationRequest):
                 "Recommend the appropriate Constellation program based on the user's stage and goals.\n"
                 "- The 80,000 Hours website (80000hours.org) is the best source of knowledge about qualifications needed for different AI safety roles. "
                 "They have excellent profile descriptions. Their job board lists AI safety positions. Recommend it as a resource when relevant.\n"
-                "- In rare occasions, orgs might hire a good professional from outside the community and train them in AI safety."
+                "- In rare occasions, orgs might hire a good professional from outside the community and train them in AI safety.\n"
+                "- CRITICAL: Respect the user's stated time availability. "
+                "If someone can commit less than 10 hours per week, do NOT recommend full-time programs "
+                "(MATS, ARENA, Astra Fellowship, Visiting Fellowship, Constellation Incubator, AI Safety Camp). "
+                "Instead, recommend part-time-friendly options: BlueDot courses, AISF reading groups, Apart Research hackathons, "
+                "80,000 Hours advising, Alignment Forum/LessWrong, FIG (part-time/remote), or self-paced resources. "
+                "For users with 2–5 hours/week, focus on low-commitment entry points. "
+                "Only suggest full-time programs as aspirational next steps IF the user indicates they may increase availability in the future."
             ),
             messages=[
                 {
