@@ -104,8 +104,17 @@ Intensive technical upskilling program focused on ML engineering for alignment r
 **MATS (ML Alignment Theory Scholars)**
 Competitive 3-month research program pairing scholars with senior alignment researchers (Anthropic, DeepMind, ARC). Requires strong ML/research background. Stipend provided. Very competitive. matsprogram.org
 
-**Astra Fellowship**
-A deeper-engagement fellowship opportunity for people who have already taken initial steps in AI safety (e.g., completed BlueDot or ARENA). Competitive.
+**Astra Fellowship (Constellation)**
+A fully-funded, in-person fellowship (3–6 months) at Constellation's Berkeley research center that pairs emerging researchers with senior advisors. Project focus areas include technical safety, governance, strategy, and field-building. Best for people who have already taken initial steps in AI safety (e.g., completed BlueDot or ARENA) and want intensive mentorship. Very competitive. constellation.org/programs/astra
+
+**Constellation Visiting Fellowship**
+A lightly-structured, funded fellowship (3–6 months) for full-time AI safety researchers to work from Constellation's Berkeley research center and connect with the broader network. Best for researchers already working in AI safety who want access to a collaborative environment and strong network. constellation.org/programs/visiting-fellowship
+
+**Constellation Incubator**
+A 4-month program designed to build the next wave of organizations addressing advanced AI risks. Provides funding, operational support, and access to Constellation's expert network. Best for people with a concrete org-building idea related to AI safety. constellation.org/programs/incubator
+
+**Constellation General Hosting & Visitors**
+Short-term visiting and ongoing workspace access at Constellation's Berkeley research center for individuals, teams, and established organizations aligned with the AI safety mission. Good for networking and short collaborative stints. constellation.org/contact
 
 **Future Impact Group (FIG)**
 Very high bar, very personalized fellowship. FIG identifies what talents and skillsets specific projects need, then headhunts matching candidates. Part-time & remote format designed for working professionals. Currently working on 3 projects with Yoshua Bengio: (1) insurance and liability as levers for AI safety, (2) AI-driven concentration of power and economic sovereignty, (3) military AI and threats to AI safety.
@@ -221,7 +230,10 @@ async def get_recommendations(request: RecommendationRequest):
                 "they typically need a track record in the AI safety community, strong understanding of threat models, references, or exceptional educational achievements.\n"
                 "- Typical transition timeline for experienced professionals from outside AIS: 6–18 months to upskill, join the network, build trust, and complete small projects. "
                 "Sometimes 2–3 months if the person is free full-time and already has LessWrong background/context. Successif is great at supporting the transition process.\n"
-                "- A typical progression path is: BlueDot → ARENA → MATS/Astra → first AI safety job.\n"
+                "- A typical progression path is: BlueDot → ARENA → MATS/Astra Fellowship → first AI safety job.\n"
+                "- Constellation (constellation.org) runs several programs in Berkeley: the Astra Fellowship (mentored research, 3–6 months), "
+                "Visiting Fellowship (for established researchers), Incubator (for org-builders), and General Hosting (short visits/workspace). "
+                "Recommend the appropriate Constellation program based on the user's stage and goals.\n"
                 "- The 80,000 Hours website (80000hours.org) is the best source of knowledge about qualifications needed for different AI safety roles. "
                 "They have excellent profile descriptions. Their job board lists AI safety positions. Recommend it as a resource when relevant.\n"
                 "- In rare occasions, orgs might hire a good professional from outside the community and train them in AI safety."
@@ -293,7 +305,9 @@ async def follow_up(request: FollowUpRequest):
                 "- Fieldbuilding (organizing courses, fellowships, events, talent flow, career advisory, recruitment, community management) "
                 "and governance/policy (legal regulations, political landscape) are DISTINCT types of work. Never confuse them.\n"
                 "- Not everyone wants research — suggest entry-level/junior roles for people interested in comms, fieldbuilding, ops, etc.\n"
-                "- Typical career progression: BlueDot → ARENA → MATS/Astra → first AI safety job.\n"
+                "- Typical career progression: BlueDot → ARENA → MATS/Astra Fellowship → first AI safety job.\n"
+                "- Constellation runs programs in Berkeley: Astra Fellowship (mentored research, 3–6 months), "
+                "Visiting Fellowship (established researchers), Incubator (org-builders), General Hosting (short visits).\n"
                 "- Transition timeline for experienced professionals: typically 6–18 months; sometimes 2–3 months if full-time with LessWrong background.\n"
                 "- Top universities and major STEM achievements strongly preferred in competitive programs. "
                 "PhD holders in CS and experienced tech professionals may get in without prior AI safety involvement. "
